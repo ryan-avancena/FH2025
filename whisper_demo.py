@@ -1,0 +1,49 @@
+import whisper
+import pyaudio
+import wave
+import numpy as np
+import tempfile
+
+model = whisper.load_model("small")
+
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 16000  
+CHUNK = 1024
+RECORD_SECONDS = 5  
+
+audio = pyaudio.PyAudio()
+
+stream = audio.open(format=FORMAT, channels=CHANNELS,
+                    rate=RATE, input=True,
+                    frames_per_buffer=CHUNK)
+
+print("listening ... ")
+
+try:
+    while True:
+        frames = []
+        for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+            data = stream.read(CHUNK)
+            frames.append(data)
+
+        # Save the recorded chunk to a temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_audio:
+            temp_filename = temp_audio.name  # Store filename to use later
+
+        # Write to the temporary WAV file
+        with wave.open(temp_filename, 'wb') as wf:
+            wf.setnchannels(CHANNELS)
+            wf.setsampwidth(audio.get_sample_size(FORMAT))
+            wf.setframerate(RATE)
+            wf.writeframes(b''.join(frames))
+
+        # Transcribe using Whisper
+        result = model.transcribe(temp_filename)
+        print("You said:", result["text"])
+
+except KeyboardInterrupt:
+    print("\nStopping transcription.")
+    stream.stop_stream()
+    stream.close()
+    audio.terminate()
