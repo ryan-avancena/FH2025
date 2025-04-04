@@ -12,13 +12,13 @@
       <img src="{{ url_for('video_feed') }}" width="500">
     </div>
 
-    <!-- <div>
+    <div>
       <h2>Live Transcript</h2>
-      <p id="live-text">Loading...</p>
-    </div> -->
+      <p id="live-text">{{ transcript or "Loading..." }}</p>
+    </div>
   </div>
 
-  <!-- <script>
+  <script>
     setInterval(() => {
       fetch("/live_transcript")
         .then(response => response.json())
@@ -26,6 +26,6 @@
           document.getElementById("live-text").innerText = data.text || "Listening...";
         });
     }, 2000);
-  </script> -->
+  </script>
 </body>
 </html>
