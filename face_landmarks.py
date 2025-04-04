@@ -16,7 +16,7 @@ contour_color = (0, 0, 255)
 tesselation_specs = mp_drawing.DrawingSpec(color=tesselation_color, thickness=1)
 contour_specs = mp_drawing.DrawingSpec(color=contour_color, thickness=1)
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 mp_face_mesh = mp.solutions.face_mesh
 

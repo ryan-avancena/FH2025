@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <title>Flask Face + Whisper</title>
+</head>
+<body>
+  <h1>Real-Time Face + Voice Demo</h1>
+
+  <div style="display: flex; gap: 30px;">
+    <div>
+      <h2>Webcam</h2>
+      <img src="{{ url_for('video_feed') }}" width="500">
+    </div>
+
+    <!-- <div>
+      <h2>Live Transcript</h2>
+      <p id="live-text">Loading...</p>
+    </div> -->
+  </div>
+
+  <!-- <script>
+    setInterval(() => {
+      fetch("/live_transcript")
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("live-text").innerText = data.text || "Listening...";
+        });
+    }, 2000);
+  </script> -->
+</body>
+</html>

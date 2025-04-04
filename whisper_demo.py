@@ -5,9 +5,11 @@ import numpy as np
 import tempfile
 
 model = whisper.load_model("small")
-result = model.transcribe("148_ Backward Design_ The Basics.m4a")
+result = model.transcribe("1d.mp3")
 print(result["text"])
 
+
+""" if you want to transcribe the audio from your microphone  ... """
 # FORMAT = pyaudio.paInt16
 # CHANNELS = 1
 # RATE = 16000  
