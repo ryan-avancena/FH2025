@@ -7,8 +7,6 @@ def generate_face_mesh_stream():
     mp_face_mesh = mp.solutions.face_mesh
 
     drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
-    tesselation_color = (0, 255, 0) 
-    contour_color = (0, 0, 255)     
 
     cap = cv2.VideoCapture(0)
 
@@ -16,8 +14,8 @@ def generate_face_mesh_stream():
     with mp_face_mesh.FaceMesh(
         max_num_faces=2,
         refine_landmarks=True,
-        min_detection_confidence=0.5,       
-        min_tracking_confidence=0.5
+        min_detection_confidence=0.3,       
+        min_tracking_confidence=0.3
     ) as face_mesh:
 
         while True:
