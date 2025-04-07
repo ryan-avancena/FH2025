@@ -8,7 +8,7 @@ def generate_face_mesh_stream():
 
     drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     """ have fun with this LOL """
     with mp_face_mesh.FaceMesh(
